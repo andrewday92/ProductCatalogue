@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+}
+
+section{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card{
+  width: 100%;
+  @media screen and (min-width: 600px) {
+    width: 20%;
+
+  }
+  border: 1px solid whitesmoke;
+  padding: 1em;
+  height: auto;
+  background-color: white;
+  margin: 1em;
+  transition: all 0.2s ease-in;
+  overflow: hidden;
+  &:hover, &:focus {
+    box-shadow: 3px 3px 3px 3px lightgrey;
+  }
+  &-head{
+    height: 20em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__image{
+      width: auto;
+      height: 15em;
+      max-width: 100%;
+    }
+  }
+  &-contents{
+    height: 15em;
+    padding: 1em;
+    &__price{
+      p{
+        color: grey;
+      }
+    }
+    &__description{
+      font-size: 0.8em;
+    }
+  }
+  img{
+    mix-blend-mode: multiply;
+  }
+}

@@ -1,0 +1,23 @@
+
+
+
+<div>
+  <div class="card-head">
+    <img class="card-head__image" [src]="product.image" width="50" height="50" alt="" srcset="">
+  </div>
+  <div class="card-contents">
+    <div class="card-contents__title">
+      <p>{{product.title}}</p>
+      <hr>
+    </div>
+    <div class="card-contents__price">
+      <p>£{{product.price | number: '1.2-2'}}</p>
+    </div>
+    <div class="card-contents__description">
+      <p>{{product.description}}</p>
+    </div>
+    <div class="card-contents__rating">
+      <p>{{product.rating | json}}</p>
+    </div>
+  </div>
+</div>

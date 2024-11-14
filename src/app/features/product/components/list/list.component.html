@@ -1,0 +1,13 @@
+<form [formGroup]="sortFilterForm">
+<select name="categories" id="categories" formControlName="category" (change)="selectCat()">
+  <option [value]="'all'">Please Select...</option>
+  <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+</select>
+<select name="order" id="order" formControlName="order" (change)="selectOrder()">
+  <option [value]="'asc'">ASC</option>
+  <option [value]="'desc'">DESC</option>
+</select>
+</form>
+<section *ngIf="products$ | async as products">
+  <app-card *ngFor="let product of products | filterBy: filterField : filterFieldValue | orderByValue: {field: sortField, order: sortOrder}; trackBy: trackById" [product]="product"></app-card>
+</section>
