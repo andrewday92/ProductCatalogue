@@ -17,11 +17,6 @@ export class Product {
     this.image = _image;
     this.rating = _rating;
   }
-
-  getKeys(): string[]
-  {
-    return Object.keys(Product);
-  }
 }
 
 export type Rating = {

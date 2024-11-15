@@ -7,6 +7,12 @@
   <option [value]="'asc'">ASC</option>
   <option [value]="'desc'">DESC</option>
 </select>
+<div class="sort-field-container">
+  <div *ngFor="let field of sortFields">
+    <label>{{field}}</label>
+    <input type="radio" formControlName="sortFields" [value]="field" (change)="sortOnField()">
+  </div>
+</div>
 </form>
 <section *ngIf="products$ | async as products">
   <app-card *ngFor="let product of products | filterBy: filterField : filterFieldValue | orderByValue: {field: sortField, order: sortOrder}; trackBy: trackById" [product]="product"></app-card>
