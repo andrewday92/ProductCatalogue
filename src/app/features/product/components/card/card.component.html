@@ -1,23 +1,24 @@
 
 
 
-<div>
+<div class="card-container" tabindex="0">
   <div class="card-head">
-    <img class="card-head__image" [src]="product.image" width="50" height="50" alt="" srcset="">
+    <img class="card-head__image" [ngSrc]="product.image" width="50" height="50" alt="" srcset="">
+    <div class="card-head__basket-actions">
+      <button class="btn btn-action" (click)="addToCart(product.id)">Add to Basket</button>
+    </div>
   </div>
   <div class="card-contents">
     <div class="card-contents__title">
-      <p>{{product.title}} - ({{product.category}})</p>
-      <hr>
+      <p>{{product.title}}</p>
     </div>
+    <hr>
     <div class="card-contents__price">
-      <p>£{{product.price | number: '1.2-2'}}</p>
+      <p>£{{product.price | number: '1.2-2'}} - ({{product.category}}) </p>
+      <div class="stars" style="--rating: {{product.rating.rate}};" [attr.title]="product.title + ' has a rating of ' + product.rating.rate + ' out of 5'" [attr.aria-label]="product.title + ' has a rating of ' + product.rating.rate + ' out of 5'"></div> - <small>({{product.rating.count}})</small>
     </div>
     <div class="card-contents__description">
-      <p>{{product.description}}</p>
-    </div>
-    <div class="card-contents__rating">
-      <p>{{product.rating | json}}</p>
+      <p>{{product.description | ellipsis: 100}}</p>
     </div>
   </div>
 </div>
