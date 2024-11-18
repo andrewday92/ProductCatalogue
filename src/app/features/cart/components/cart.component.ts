@@ -30,7 +30,7 @@ export class CartComponent {
   get hasCart(): boolean {
     return !!this.cart
   };
-  protected showCart : boolean = false;
+  public showCart : boolean = false;
   constructor(private _browserStorageService: BrowserStorageService, private _productsService: ProductService) {
   }
 

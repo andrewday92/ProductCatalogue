@@ -12,21 +12,21 @@ import { ProductService } from 'src/app/shared/services/product.service';
   standalone: false
 })
 export class ListComponent {
-  protected products$: Observable<Product[]>;
-  protected categories!: string[];
-  protected sortField: keyof Product = 'title';
-  protected sortFields: any;
-  protected filterField: string = 'category';
-  protected filterFieldValue: string[] = [];
-  protected sortOrder: 'asc' | 'desc' = 'asc';
-  protected sortFilterForm = new FormGroup({
+  public products$: Observable<Product[]>;
+  public categories!: string[];
+  public sortField: keyof Product = 'title';
+  public sortFields: any;
+  public filterField: string = 'category';
+  public filterFieldValue: string[] = [];
+  public sortOrder: 'asc' | 'desc' = 'asc';
+  public sortFilterForm = new FormGroup({
     categories: new FormArray<any>([]),
     order: new FormControl<'asc' | 'desc'>('asc'),
     sortFields: new FormControl<string>('title'),
   });
   protected isSidebarCollapsed: boolean = true;
   get categoriesFormArray() {
-    return this.sortFilterForm.get('categories') as FormArray;
+    return this.sortFilterForm.get('categories') as FormArray ?? [];
   }
   constructor(private _productsService: ProductService){
     this.products$ = this._productsService.getAllProducts<Product>()

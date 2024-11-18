@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class CardComponent {
   @Input() product!: Product;
-  constructor(private _browserStorageService: BrowserStorageService, private _productService: ProductService){}
+  constructor(private _productService: ProductService){}
 
   addToCart(product: Product){
     this._productService.addToCart(product);
