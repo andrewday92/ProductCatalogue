@@ -5,10 +5,10 @@
   <div class="card-head">
     <img class="card-head__image" [ngSrc]="product.image" width="50" height="50" alt="" srcset="">
     <div class="card-head__basket-actions">
-      <button class="btn btn-action" (click)="addToCart(product.id)">Add to Basket</button>
+      <button class="btn btn-action" (click)="addToCart(product)">Add to Basket</button>
     </div>
   </div>
-  <div class="card-contents">
+  <div class="card-contents" [routerLink]="[product.id]">
     <div class="card-contents__title">
       <p>{{product.title}}</p>
     </div>

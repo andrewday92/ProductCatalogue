@@ -6,6 +6,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { CardComponent } from './components/card/card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     CoreModule,
     SharedModule
   ],

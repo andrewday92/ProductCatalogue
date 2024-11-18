@@ -1,5 +1,6 @@
 
 $theme-color: rgb(238, 0, 142);
+$theme-font: Open Sans,helvetica,arial,sans-serif;
 /* You can add global styles to this file, and also import other style files */
 :root {
   --star-size: 1em;
@@ -9,12 +10,55 @@ $theme-color: rgb(238, 0, 142);
 *{
   box-sizing: border-box;
 }
+
+body{
+  font-family: $theme-font;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button{
+  font-family: $theme-font;
+  cursor: pointer;
+  border: 2px;
+  border-style: solid;
+  border-color: $theme-color;
+  background-color: whitesmoke;
+  transition: background-color 0.2s ease-in;
+  font-weight: 800;
+  @media (prefers-reduced-motion: reduce) {
+    transition: all 0s ease-in;
+  }
+  &.btn-action{
+
+    &:not(.btn-action__collapse){
+      &:hover, &:focus{
+        scale: 1.1;
+      }
+    }
+    &:hover, &:focus{
+      background-color: $theme-color;
+      color: #fff;
+    }
+    &__collapse{
+      border-width: 2px 2px 2px 0px;
+    }
+  }
+}
+
 .controls-container{
   position: fixed;
   z-index: 9999;
   background-color: white;
-  width: 20dvw;
   height: 100dvh;
+  width: 80dvw;
+  @media screen and (min-width: 1000px) {
+    width: 25dvw;
+  }
+  @media screen and (min-width: 700px) and (max-width: 1000px) {
+    width: 40dvw;
+  }
+
   top: 0;
   left: 0;
   padding: 1em;
@@ -27,8 +71,6 @@ $theme-color: rgb(238, 0, 142);
     transform: translateX(-100%);
   }
   button{
-    cursor: pointer;
-    border: unset;
     &.btn-action{
       background-color: whitesmoke;
       transition: all 0.2s ease-in;
@@ -38,10 +80,6 @@ $theme-color: rgb(238, 0, 142);
       font-size: 1.5em;
       margin: 0em 0em 0.2em 0em;
       padding: 0.3em;
-      &:hover{
-        background-color: $theme-color;
-        color: white;
-      }
       &__collapse{
         position: absolute;
         top: 25dvh;
@@ -49,7 +87,6 @@ $theme-color: rgb(238, 0, 142);
         height: 50dvh;
         z-index: 9990;
         border-radius: 0px 3px 3px 0px;
-        border-width: 1px 1px 1px 0px;
         box-shadow: 2px 2px 2px 0px #888888;
         animation: shake 0.5s 0.3s ease-in;
         padding: 0.5em;
@@ -59,7 +96,7 @@ $theme-color: rgb(238, 0, 142);
         @keyframes shake {
           0% {
             transform: rotate(0deg);
-            border-width: 1px 1px 1px 1px;
+            border-width: 2px 2px 2px 0px;
           }
           33% {
             transform: rotate(1deg);
@@ -71,7 +108,7 @@ $theme-color: rgb(238, 0, 142);
           100% {
             transform: rotate(0deg);
             scale: 1;
-            border-width: 1px 1px 1px 1px;
+            border-width: 2px 2px 2px 0px;
           }
         }
       }
@@ -146,6 +183,7 @@ section{
   &-container{
     background: transparent;
     border-radius: 0em 0em 0em 2em;
+
     &:hover, &:focus {
       box-shadow: .6em .5em .5em .2em  rgb(227, 227, 227);
       @media (prefers-reduced-motion: no-preference) {
@@ -181,9 +219,13 @@ section{
     position: relative;
     overflow: hidden;
     margin-bottom: -2em;
+    p{
+      margin: 0;
+    }
     &__image{
       width: auto;
       height: 15em;
+      max-height: 100%;
       max-width: 100%;
     }
     &__basket-actions{
@@ -201,20 +243,25 @@ section{
         position: relative;
         z-index: 150;
         padding: 1em 2em;
-        background-color: $theme-color;
-        color: #fff;
-        border: unset;
         border-radius: 1em 0em 1em 0em;
         opacity: 0;
-        transition: all 0.2s 0.2s ease-in;
-        @media (prefers-reduced-motion: reduce) {
-          transition: all 0s ease-in;
+        transition: opacity 0.2s 0.2s ease-in, scale 0.2s 0.2s ease-in;
+        &:hover, &:focus {
+          opacity: 1;
+          scale: 1.1;
+          .card-head__basket-actions{
+            transform: translateY(0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
       }
       background-color: rgba(18, 17, 17, 0.6);
     }
   }
   &-contents{
+    cursor: pointer;
     background-color: #fff;
     position: relative;
     z-index: 900;
@@ -226,6 +273,7 @@ section{
       min-height: 4em;
     }
     &__price{
+      min-height: 2em;
       p{
         color: grey;
       }
@@ -256,4 +304,200 @@ section{
     width: 80%;
     object-fit: contain;
   }
+}
+
+
+
+
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}
+
+.cart{
+  border-radius: 50%;
+  background-color: whitesmoke;
+  position: fixed;
+  z-index: 9999;
+  bottom: 1em;
+  right: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease-in;
+  @media (prefers-reduced-motion: reduce) {
+    transition: all 0s ease-in;
+  }
+
+  .fa-basket-shopping{
+    font-size: 3em;
+    padding: 0.5em;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    small{
+      position: absolute;
+      z-index: 9999;;
+      top:0;
+      right: 0.5em;
+      font-size: 0.8rem;
+      width: auto;
+      height: auto;
+      border-radius: 50%;
+      padding: 0.4rem;
+      border: 2px solid $theme-color;
+      background-color: whitesmoke;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &:hover, &:focus{
+      background-color: $theme-color;
+      color: #fff;
+      box-shadow: .1em .1em .1em  rgb(227, 227, 227);
+      scale: 1.1;
+      small{
+        border: 2px solid #000;
+        background-color: $theme-color;
+      }
+    }
+  }
+  &.expand{
+    width: 40%;
+    border-radius: 1em;
+    .fa-basket-shopping{
+      display: none;
+    }
+    .cart__contents{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+  }
+  &.shrink{
+    cursor: pointer;
+    .fa-basket-shopping{
+      display: block;
+    }
+    .cart__contents{
+      display: none;
+    }
+  }
+  &__contents{
+    overflow-y: scroll;
+    max-height: 50dvh;
+    background-color: $theme-color;
+    border-radius: 0.2em;
+    &-icon-container{
+      padding: 0em 0.5em;
+      z-index: 9999;
+      position: sticky;
+      top: 0;
+      right: 0;
+      background-color: $theme-color;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+    }
+    &-icon{
+      cursor: pointer;
+      font-size: 1.7em;
+      margin: 0.2em;
+      &:hover, &:focus{
+        scale:1.1;
+        color: #fff;
+        background-color: $theme-color;
+      }
+    }
+
+    &-item{
+      width: 100%;
+        position: relative;
+        .item-head{
+          background-color: $theme-color;
+          position: sticky;
+          top: 1em;
+          right: 0;
+          text-align: left;
+          font-size: 1.2em;
+          padding: 0em 0.6em;
+          color: #fff;
+          h4{
+            width: 20%;
+            &:first-of-type{
+              width: 40%
+            }
+          }
+        }
+        ul{
+          list-style: none;
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin: 0;
+          padding: 0;
+          li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-left: 1em;
+            &:nth-child(odd){
+              background: white;
+            }
+            &:nth-child(even){
+              background-color: whitesmoke;
+            }
+            p{
+              width: 20%;
+              &:first-of-type{
+                width: 40%
+              }
+              &.price-label{
+                width: 60%;
+              }
+              padding: 1em;
+              margin: 0;
+              border: none;
+              &.cart__contents-item-amount{
+                font-size: 1.2em;
+              }
+              button.btn-action{
+                border-radius: 0.3em;
+                background-color: unset;
+                color: $theme-color;
+                font-size: 1.2em;
+                padding: 0.5em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: auto;
+                &:hover, &:focus{
+                  background-color: $theme-color;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+  }
+}
+
+.text-right{
+  text-align: right;
+}
+
+
+
+.d-flex{
+  display: flex;
+  justify-content: space-between;
 }

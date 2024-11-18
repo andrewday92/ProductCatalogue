@@ -13,18 +13,11 @@ export class CardComponent {
   @Input() product!: Product;
   constructor(private _browserStorageService: BrowserStorageService){}
 
-  addToCart(productId: string) {
-    let cart = this._browserStorageService.getItem('cart') ? JSON.parse(this._browserStorageService.getItem('cart')) : {[`product-${productId}`]: 1};
-    if(cart){
-      let propName = `product-${productId}`;
-     if(cart.hasOwnProperty(propName)){
-       cart[propName] += 1;
-     } else {
-      cart[propName] = 1;
-     }
-    }
+  addToCart(product: Product) {
+    let cart = this._browserStorageService.getItem('cart') ? JSON.parse(this._browserStorageService.getItem('cart')) : [];
+    let cartIndex = cart.findIndex((cartItem: Product) => cartItem.id === product.id);
+    cartIndex !== -1 ? cart[cartIndex].amount += 1 : cart.push({id: product.id, price: product.price, title: product.title, amount: 1});
+
     this._browserStorageService.setItem<StorageType>('cart', {data: cart,type: StorageTypes.Session})
-
-
   }
 }

@@ -6,7 +6,7 @@
     <h3>Fitler By Categories</h3>
     <div class="controls-container__categories inset-align">
       <label formArrayName="categories" *ngFor="let cat of categories; let i = index;">
-        <input type="checkbox" [formControlName]="i" [value]="cat" (change)="selectCat()">
+        <input type="checkbox" [tabindex]="isSidebarCollapsed ? -1 : 0" [formControlName]="i" [value]="cat" (change)="selectCat()">
         {{cat}}
       </label>
 
@@ -15,14 +15,14 @@
 
     <h3>Sort By</h3>
     <h4>Sort Order</h4>
-    <select class="controls-container__sort-order" name="order" id="order" formControlName="order" (change)="selectOrder()">
+    <select class="controls-container__sort-order" name="order" [tabindex]="isSidebarCollapsed ? -1 : 0" id="order" formControlName="order" (change)="selectOrder()">
       <option [value]="'asc'">Ascending</option>
       <option [value]="'desc'">Descending</option>
     </select>
     <h4>Sort Type</h4>
     <div class="controls-container__sort inset-align">
         <label *ngFor="let field of sortFields">
-          <input type="radio" formControlName="sortFields" [value]="field" (change)="sortOnField()">
+          <input type="radio" formControlName="sortFields" [tabindex]="isSidebarCollapsed ? -1 : 0" [value]="field" (change)="sortOnField()">
           {{field}} ({{sortOrder}})
         </label>
     </div>

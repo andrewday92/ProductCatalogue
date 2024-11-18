@@ -24,12 +24,12 @@ export class ListComponent {
     order: new FormControl<'asc' | 'desc'>('asc'),
     sortFields: new FormControl<string>('title'),
   });
-  protected isSidebarCollapsed: boolean = (window.innerWidth < 600);
+  protected isSidebarCollapsed: boolean = true;
   get categoriesFormArray() {
     return this.sortFilterForm.get('categories') as FormArray;
   }
   constructor(private _productsService: ProductService){
-    this.products$ = this._productsService.getAllProducts()
+    this.products$ = this._productsService.getAllProducts<Product>()
     .pipe(
       tap((products: Product[]) => {
         this.categories = this._productsService.categories;
