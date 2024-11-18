@@ -1,0 +1,29 @@
+
+button{
+  font-family: $theme-font;
+  cursor: pointer;
+  border: 2px;
+  border-style: solid;
+  border-color: $theme-color;
+  background-color: whitesmoke;
+  transition: background-color 0.2s ease-in;
+  font-weight: 800;
+  @media (prefers-reduced-motion: reduce) {
+    transition: all 0s ease-in;
+  }
+  &.btn-action{
+
+    &:not(.btn-action__collapse){
+      &:hover, &:focus{
+        scale: 1.1;
+      }
+    }
+    &:hover, &:focus{
+      background-color: $theme-color;
+      color: #fff;
+    }
+    &__collapse{
+      border-width: 2px 2px 2px 0px;
+    }
+  }
+}
