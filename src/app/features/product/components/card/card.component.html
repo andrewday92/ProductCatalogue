@@ -1,7 +1,7 @@
 
 
 
-<div class="card-container" tabindex="0">
+<div class="card-container" tabindex="0" *ngIf="product">
   <div class="card-head">
     <img class="card-head__image" [ngSrc]="product.image" width="50" height="50" alt="" srcset="">
     <div class="card-head__basket-actions">
