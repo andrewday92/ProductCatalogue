@@ -18,7 +18,7 @@
       <div class="stars" style="--rating: {{product.rating.rate}};" [attr.title]="product.title + ' has a rating of ' + product.rating.rate + ' out of 5'" [attr.aria-label]="product.title + ' has a rating of ' + product.rating.rate + ' out of 5'"></div> - <small>({{product.rating.count}})</small>
     </div>
     <div class="card-contents__description">
-      <p>{{product.description | ellipsis: 100}}</p>
+      <p aria-label="Product Description">{{product.description | ellipsis: 100}}</p>
     </div>
   </div>
 </div>
