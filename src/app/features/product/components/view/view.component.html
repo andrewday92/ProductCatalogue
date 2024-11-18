@@ -1,7 +1,12 @@
-<div class="d-flex">
-  <img [ngSrc]="product.image" width="50" height="50">
-  <p>{{product.title}}</p>
-  <p>{{product.price}}</p>
-  <p>{{product.description}}</p>
-  <p>{{product.category}}</p>
+<div class="d-flex product-page" *ngIf="product$ | async as product">
+  <img class="product-page__image" [ngSrc]="product.image" width="50" height="50">
+  <div class="product-page__details">
+    <h2>{{product.title}}</h2>
+    <div class="card-contents__price">
+      <p>£{{product.price | number: '1.2-2'}} - ({{product.category}}) </p>
+      <div class="stars" style="--rating: {{product.rating.rate}};" [attr.title]="product.title + ' has a rating of ' + product.rating.rate + ' out of 5'" [attr.aria-label]="product.title + ' has a rating of ' + product.rating.rate + ' out of 5'"></div> - <small>({{product.rating.count}})</small>
+    </div>
+    <p class="product-page__details-description">{{product.description}}</p>
+    <button class="btn btn-action product-page__add" (click)="addToCart(product)">Add to Basket</button>
+  </div>
 </div>

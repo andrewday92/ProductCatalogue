@@ -20,7 +20,6 @@ export class ProductService implements OnDestroy{
         this._browserStorageService.setItem<StorageType>('products', {type: StorageTypes.Local, data: products});
         this.categories = [...new Set<string>(products.map((product: any) => product.category))].sort();
         this.products$.next(products);
-
       })
     );
   }
@@ -29,8 +28,15 @@ export class ProductService implements OnDestroy{
     return this._api.get<Product>(`products/${id}`);
   }
 
+  addToCart(product: Product) {
+    let cart = this._browserStorageService.getItem('cart') ? JSON.parse(this._browserStorageService.getItem('cart')) : [];
+    let cartIndex = cart.findIndex((cartItem: Product) => cartItem.id === product.id);
+    cartIndex !== -1 ? cart[cartIndex].amount += 1 : cart.push({id: product.id, price: product.price, title: product.title, amount: 1});
+
+    this._browserStorageService.setItem<StorageType>('cart', {data: cart,type: StorageTypes.Session});
+  }
+
   ngOnDestroy() {
-    console.log('was destroyed');
     this.destroy$.next();
     this.destroy$.complete();
   }
